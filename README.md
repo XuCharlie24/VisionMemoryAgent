@@ -1,33 +1,125 @@
-﻿# Vision Memory Agent：基于 RDK X3 的视觉记忆型边缘智能体
+
+# Vision Memory Agent
+
+## 基于 RDK X3 的视觉记忆型边缘智能体
+
+---
 
 ## 项目简介
 
-本项目基于 RDK X3 与 USB 摄像头构建视觉记忆型边缘智能体，实现实时视频采集、边缘目标识别、视觉记忆管理、手势交互控制、三维记忆空间可视化和事件时间线记录。系统通过 RDK X3 完成边缘视觉感知与记忆状态管理，通过本地前端完成可视化展示与自然交互，形成“看见目标—生成记忆—手势交互—三维展示”的完整闭环。
+Vision Memory Agent 是运行在 RDK X3 边缘计算平台上的视觉智能系统，实现实时视频分析、目标识别与视觉记忆建模。
+
+系统通过摄像头获取画面，在本地完成目标检测与记忆构建，并通过 Web 前端进行三维可视化展示。
+
+---
 
 ## 核心功能
 
-1. USB 摄像头实时视频采集；
-2. RDK X3 边缘目标识别；
-3. 视觉记忆生成、去重与位置记录；
-4. 本地前端手势交互；
-5. 视觉记忆切换与锁定；
-6. 三维记忆空间可视化；
-7. 事件时间线记录；
-8. 前后端状态监控。
+- 实时摄像头视频采集（USB Camera）
+- 边缘端目标检测（人 / 物体）
+- 视觉记忆构建（出现 / 消失 / 时长记录）
+- 基础手势交互
+- Web 前端可视化
+- Three.js 三维记忆空间
+
+---
 
 ## 系统架构
 
-RDK X3 后端负责摄像头采集、MJPEG 视频流、目标检测、视觉记忆管理和状态接口；PC 前端负责视频展示、手势识别、记忆档案、三维记忆空间和事件时间线。前后端通过 HTTP API 与 MJPEG 视频流连接。
+RDK X3（边缘端）
+- 视频采集模块
+- 目标检测模块
+- 视觉记忆模块
+- FastAPI 后端服务
 
-## 运行环境
+↓  
 
-- RDK X3 4GB；
-- USB 摄像头；
-- Python 3；
-- FastAPI；
-- OpenCV；
-- 目标检测模型；
-- React；
-- Vite；
-- Three.js；
-- 前端手势识别模型。
+本地前端（Frontend）
+- React + Vite
+- Three.js
+- UI展示层
+
+---
+
+## 项目结构
+
+VisionMemoryAgent/
+- backend/   后端服务（RDK X3）
+- frontend/  前端可视化
+- docs/      项目文档
+
+---
+
+## 快速启动
+
+### 后端（RDK X3）
+
+```bash
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+```
+
+------
+
+### 前端
+
+```bash
+
+cd frontend
+npm install
+npm run dev
+```
+
+
+
+## 访问地址
+
+前端：[http://localhost:5173](http://localhost:5173/)
+后端：[http://localhost:8000](http://localhost:8000/)
+
+------
+
+## 项目特点
+
+- 视觉记忆机制（记录目标出现与消失）
+- 边缘计算本地推理
+- 实时视觉 + 手势交互
+- 三维空间可视化
+- 完整感知-记忆闭环系统
+
+------
+
+## 应用场景
+
+- 智能学习陪伴系统
+- AI视觉监控
+- 人机交互实验平台
+- 视觉记忆增强系统
+
+------
+
+## 技术栈
+
+- Python 3 / FastAPI
+- OpenCV
+- ONNX Runtime
+- React + Vite
+- Three.js
+- RDK X3
+
+------
+
+## 项目状态
+
+- 已完成核心功能
+- 已完成前后端联调
+- 支持实时视频流
+- 支持目标识别
+- 支持视觉记忆系统
+- 支持Web可视化
+
+------
