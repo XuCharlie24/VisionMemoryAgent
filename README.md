@@ -1,125 +1,158 @@
-
 # Vision Memory Agent
 
-## 基于 RDK X3 的视觉记忆型边缘智能体
+Vision Memory Agent is an intelligent visual memory system based on the RDK X3 development board. The system uses a camera to capture real-time images, performs object recognition and visual memory recording on the edge device, and provides an interactive web interface on the PC side.
 
----
+This project aims to build a lightweight visual memory agent that can observe the environment, recognize objects, remember detected targets, and display memory records through a visual frontend interface. It combines edge AI perception, visual memory management, and human-computer interaction.
 
-## 项目简介
+## Features
 
-Vision Memory Agent 是运行在 RDK X3 边缘计算平台上的视觉智能系统，实现实时视频分析、目标识别与视觉记忆建模。
+- Real-time camera video streaming
+- Object detection and recognition
+- Visual memory recording and updating
+- Object appearance count statistics
+- Memory status visualization
+- Gesture interaction
+- Web-based frontend interface
+- Frontend and backend separated architecture
+- Edge deployment based on RDK X3
 
-系统通过摄像头获取画面，在本地完成目标检测与记忆构建，并通过 Web 前端进行三维可视化展示。
+## Project Structure
 
----
+Vision-Memory-Agent/
+├── backend/ Backend service running on RDK X3
+├── frontend/ Web frontend running on PC
+├── docs/ Project documents and related materials
+├── README.md English project description
+└── README_cn.md Chinese project description
 
-## 核心功能
+## System Architecture
 
-- 实时摄像头视频采集（USB Camera）
-- 边缘端目标检测（人 / 物体）
-- 视觉记忆构建（出现 / 消失 / 时长记录）
-- 基础手势交互
-- Web 前端可视化
-- Three.js 三维记忆空间
+The project adopts a frontend-backend separated architecture.
 
----
+The backend runs on the RDK X3 development board and is responsible for camera access, video stream output, object recognition, memory management, and API services.
 
-## 系统架构
+The frontend runs in the PC browser and obtains real-time video streams, recognition results, and visual memory data from the backend through HTTP APIs.
 
-RDK X3（边缘端）
-- 视频采集模块
-- 目标检测模块
-- 视觉记忆模块
-- FastAPI 后端服务
+## Technology Stack
 
-↓  
+Backend:
 
-本地前端（Frontend）
-- React + Vite
+- Python 3
+- FastAPI
+- Uvicorn
+- OpenCV
+- RDK X3
+- USB Camera
+
+Frontend:
+
+- React
+- Vite
+- JavaScript / JSX
+- SCSS
 - Three.js
-- UI展示层
 
----
+## Main Modules
 
-## 项目结构
+## 1. Video Stream Module
 
-VisionMemoryAgent/
-- backend/   后端服务（RDK X3）
-- frontend/  前端可视化
-- docs/      项目文档
+The system captures real-time images from the camera and provides video stream output through the backend API.
 
----
+## 2. Object Recognition Module
 
-## 快速启动
+The backend analyzes video frames and recognizes common objects in the scene, such as cups, phones, books, bottles, keyboards, mice, and people.
 
-### 后端（RDK X3）
+## 3. Visual Memory Module
 
-```bash
+The system records recognized objects, including object category, confidence, position, detection count, and recent status. It reduces repeated memory records for the same object in similar positions and maintains a lightweight visual memory list.
+
+## 4. Gesture Interaction Module
+
+The frontend supports gesture-based interaction, allowing users to interact with the visual memory system in a more natural way.
+
+## 5. Visualization Interface
+
+The frontend provides a visual dashboard including real-time video, memory records, status cards, and 3D-style interactive elements.
+
+## Backend Startup
+
+Enter the backend directory:
+
 cd backend
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+
+Install dependencies:
+
+pip3 install -r requirements.txt
+
+Start the backend service:
+
 python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 
-```
+After startup, the backend service will be available at:
 
-------
+http://<RDK_X3_IP>:8000
 
-### 前端
+## Frontend Startup
 
-```bash
+Enter the frontend directory:
 
 cd frontend
+
+Install dependencies:
+
 npm install
+
+Start the frontend development server:
+
 npm run dev
-```
 
+Then open the frontend address in the browser according to the terminal output.
 
+## API Overview
 
-## 访问地址
+Common backend APIs include:
 
-前端：[http://localhost:5173](http://localhost:5173/)
-后端：[http://localhost:8000](http://localhost:8000/)
+GET /api/video/stream
+GET /api/memory/status
+POST /api/memory/reset
+GET /api/status/current
 
-------
+The actual API paths should follow the backend implementation in this repository.
 
-## 项目特点
+## Deployment Description
 
-- 视觉记忆机制（记录目标出现与消失）
-- 边缘计算本地推理
-- 实时视觉 + 手势交互
-- 三维空间可视化
-- 完整感知-记忆闭环系统
+1. Connect the USB camera to the RDK X3 board.
+2. Start the backend service on the RDK X3 board.
+3. Start the frontend service on the PC.
+4. Access the frontend page through the browser.
+5. View real-time video, recognition results, and visual memory records.
 
-------
+## Project Highlights
 
-## 应用场景
+- Uses RDK X3 as the edge AI computing platform.
+- Combines object recognition with visual memory management.
+- Provides a visual and interactive frontend interface.
+- Supports real-time camera stream and memory status display.
+- Separates frontend and backend for clearer engineering structure.
+- Suitable for embedded AI application scenarios and intelligent human-computer interaction demonstrations.
 
-- 智能学习陪伴系统
-- AI视觉监控
-- 人机交互实验平台
-- 视觉记忆增强系统
+## Application Scenarios
 
-------
+- Embedded AI demonstration
+- Intelligent visual assistant
+- Human-computer interaction experiment
+- Edge vision perception system
+- Smart classroom or smart desktop interaction
+- Object memory and environment awareness applications
 
-## 技术栈
+## Notes
 
-- Python 3 / FastAPI
-- OpenCV
-- ONNX Runtime
-- React + Vite
-- Three.js
-- RDK X3
+- Please ensure that the camera is correctly connected before starting the backend.
+- Please modify the backend service address in the frontend configuration according to the actual RDK X3 IP address.
+- This project is mainly used for competition demonstration and embedded AI application verification.
 
-------
+## License
 
-## 项目状态
-
-- 已完成核心功能
-- 已完成前后端联调
-- 支持实时视频流
-- 支持目标识别
-- 支持视觉记忆系统
-- 支持Web可视化
+This project is used for learning, research, and competition demonstration.
 
 ------
